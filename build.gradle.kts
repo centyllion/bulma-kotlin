@@ -101,7 +101,8 @@ publishing {
 bintray {
     user = System.getenv("BINTRAY_USER") ?: System.getProperty("bintray.user")
     key = System.getenv("BINTRAY_KEY") ?: System.getProperty("bintray.key")
-    //publish = true
+    publish = true
+    override = true
 
     setPublications("lib")
 
