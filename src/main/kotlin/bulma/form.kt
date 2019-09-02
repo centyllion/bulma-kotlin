@@ -243,7 +243,8 @@ class TextArea(
     override var onChange: (event: InputEvent, value: String) -> Unit = { _, _ -> }
 ) : TextView {
 
-    override val root: HTMLElement = document.create.textArea(classes = "textarea") {
+    override val root: HTMLTextAreaElement = document.create.textArea(classes = "textarea") {
+        +value
         onInputFunction = {
             val target = it.target
             if (it is InputEvent && target is HTMLTextAreaElement) {
@@ -263,11 +264,12 @@ class TextArea(
 
     var rows by attribute(rows, "rows", root)
 
-    override var value: String = value
+    override var value: String
+        get() = root.value
         set(value) {
-            if (value != field) {
-                field = value
-                root.innerText = field
+            if (root.value != value) {
+                root.value = value
+                onChange(InputEvent("change"), value)
             }
         }
 
@@ -286,6 +288,7 @@ class TextArea(
     var loading by className(loading, "is-loading", root)
 
     var disabled by booleanAttribute(false, "disabled", root)
+
 }
 
 class Option(text: String, value: String = "") : BulmaElement {
