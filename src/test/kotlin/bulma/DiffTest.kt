@@ -1,4 +1,4 @@
-package com.centyllion.model
+package bulma
 
 import kotlin.random.Random
 import kotlin.test.Test
