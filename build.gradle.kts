@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
-import java.util.*
+import java.util.Date
 
 val kotlinx_html_version: String by project
 
 group = "com.centyllion"
-version = "0.2"
+version = versioning.info.base
 
 plugins {
     id("kotlin2js") version "1.3.50"
@@ -70,7 +70,7 @@ publishing {
         create<MavenPublication>("lib") {
             groupId = artifactGroup
             artifactId = artifactName
-            version = project.versioning.info.display
+            version = project.versioning.info.base
             from(components["java"])
             artifact(sourcesJar)
 
@@ -119,7 +119,7 @@ bintray {
         githubReleaseNotesFile = githubReadme
 
         version.apply {
-            name = project.versioning.info.display
+            name = project.versioning.info.base
             desc = pomDesc
             released = Date().toString()
             vcsTag = project.versioning.info.tag
