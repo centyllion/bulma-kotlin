@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 
 class DiffTest {
 
-    fun <T> testDiff(source: List<T>, other: List<T>, diff: List<Diff<T>>? = null) {
+    private fun <T> testDiff(source: List<T>, other: List<T>, diff: List<Diff<T>>? = null) {
         val computedDiff = source.diff(other)
         if (diff != null) assertEquals(diff, computedDiff)
         assertEquals(other, source.applyDiff(computedDiff))
