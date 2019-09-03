@@ -72,7 +72,7 @@ class Field(
 }
 
 /** [Horizontal Field](https://bulma.io/documentation/form/general/#horizontal-form) */
-class HorizontalField(label: FieldElement, vararg body: FieldElement) : BulmaElement {
+class HorizontalField(label: FieldElement, vararg body: Field) : BulmaElement {
 
     override val root: HTMLElement = document.create.div("field is-horizontal") {
         div("field-label")
