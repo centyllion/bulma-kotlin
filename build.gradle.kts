@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
-import java.util.Date
+import java.util.*
 
 val kotlinx_html_version: String by project
 
 group = "com.centyllion"
-version = "0.1a"
+version = "0.2"
 
 plugins {
     id("kotlin2js") version "1.3.50"
