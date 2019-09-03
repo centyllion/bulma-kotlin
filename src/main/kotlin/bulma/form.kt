@@ -72,7 +72,7 @@ class Field(
 }
 
 /** [Horizontal Field](https://bulma.io/documentation/form/general/#horizontal-form) */
-class HorizontalField(label: FieldElement, vararg body: Field) : BulmaElement {
+class HorizontalField(label: FieldElement, vararg body: FieldElement) : BulmaElement {
 
     override val root: HTMLElement = document.create.div("field is-horizontal") {
         div("field-label")
@@ -142,7 +142,7 @@ class Control(
 
     private fun updateIcon(place: String, icon: Icon?) {
         // removes previous if any
-        val previousIcon = root.querySelector("span.is-$place")
+        val previousIcon = root.querySelector("control > span.is-$place")
         if (previousIcon != null) root.removeChild(previousIcon)
 
         // sets the has-icons-left class
