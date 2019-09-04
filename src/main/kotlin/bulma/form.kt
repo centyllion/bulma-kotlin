@@ -26,6 +26,7 @@ import org.w3c.dom.HTMLOptionElement
 import org.w3c.dom.HTMLSelectElement
 import org.w3c.dom.HTMLSpanElement
 import org.w3c.dom.HTMLTextAreaElement
+import org.w3c.dom.asList
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.FocusEvent
 import org.w3c.dom.events.InputEvent
@@ -142,7 +143,7 @@ class Control(
 
     private fun updateIcon(place: String, icon: Icon?) {
         // removes previous if any
-        val previousIcon = root.querySelector("control > span.is-$place")
+        val previousIcon = root.children.asList().find { it.classList.contains("is-$place")  }
         if (previousIcon != null) root.removeChild(previousIcon)
 
         // sets the has-icons-left class
