@@ -26,7 +26,6 @@ import org.w3c.dom.HTMLOptionElement
 import org.w3c.dom.HTMLSelectElement
 import org.w3c.dom.HTMLSpanElement
 import org.w3c.dom.HTMLTextAreaElement
-import org.w3c.dom.asList
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.FocusEvent
 import org.w3c.dom.events.InputEvent
@@ -127,7 +126,7 @@ class Control(
     var leftIcon: Icon? = leftIcon
         set(value) {
             if (value != field) {
-                updateIcon("left", value)
+                updateIcon("left", field, value)
                 field = value
             }
         }
@@ -136,30 +135,31 @@ class Control(
     var rightIcon: Icon? = rightIcon
         set(value) {
             if (value != field) {
-                updateIcon("right", value)
+                updateIcon("right", field, value)
                 field = value
             }
         }
 
-    private fun updateIcon(place: String, icon: Icon?) {
-        // removes previous if any
-        val previousIcon = root.children.asList().find { it.classList.contains("is-$place")  }
-        if (previousIcon != null) root.removeChild(previousIcon)
+    private fun updateIcon(place: String, old: Icon?, new: Icon?) {
+        if (new != old) {
+            // removes previous if any
+            old?.let { root.removeChild(it.root) }
 
-        // sets the has-icons-left class
-        root.classList.toggle("has-icons-$place", icon != null)
+            // sets the has-icons-left class
+            root.classList.toggle("has-icons-$place", new != null)
 
-        if (icon != null) {
-            // prepares the new icon
-            icon.root.classList.toggle("is-$place", true)
-            // adds the new icon
-            root.append(icon.root)
+            if (new != null) {
+                // prepares the new icon
+                new.root.classList.toggle("is-$place", true)
+                // adds the new icon
+                root.append(new.root)
+            }
         }
     }
 
     init {
-        updateIcon("left", leftIcon)
-        updateIcon("right", rightIcon)
+        updateIcon("left", null, leftIcon)
+        updateIcon("right", null, rightIcon)
     }
 }
 
