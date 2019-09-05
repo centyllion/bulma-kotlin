@@ -68,18 +68,18 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 
 ## Change logs
 
-### 0.1.3
+### 0.1.4
 
 - Bug fix disable Select element.
 - Adds TagDelete element ([source](https://bulma.io/documentation/elements/tag/#modifiers)).
 - Adds size and add-ons for Tags ([source](https://bulma.io/documentation/elements/tag/#list-of-tags)).
 - Adds support for Delete inside a Tag.
 
-### 0.1.2
+### 0.1.3
 
 - Bug fix Left and right icons for Control element.
 
-### 0.1 and 0.1.1
+### Before
 
 First import with most of the elements and options with Bulma version `0.7.5`.
 
