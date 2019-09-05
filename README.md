@@ -1,10 +1,17 @@
 # Bulma-Kotlin
 
 `bulma-kotlin` is a Kotlin JS library that create and control [Bulma](https://bulma.io) elements.
+It's developed and used at [Centyllion](https://centyllion.com) ([Twitter](https://twitter.com/centyllion)).
+
+
+**Notes**:
+- The project is in its early days it needs maturing. The API is subject to changes especially the package name which is now just `bulma`.
+- There is almost no documentation yet.
+-  Some elements depends on Bulma extensions like (Toasts)[] and (Sliders)[https://wikiki.github.io/form/slider/], it needs to be sorted out 
 
 ## What's this ?
 
-Bulma is a CSS only library that allows you to build beautiful websites. 
+[Bulma](https://bulma.io) is a CSS only library that allows you to build beautiful websites. 
 `bulma-kotlin` is a Kotlin library for the browser that helps you build web-apps using Bulma with all elements available as classes.
 To create an icon just create an `bulma.Icon` and add it to the DOM, then you can change it's properties that are applied.
 
@@ -22,12 +29,37 @@ It also provides controllers that links data and Bulma elements.
 Especially a special `MultipleController` that deals with lists.
 
 
-To get started import `bulma-kotlin` in
+To get started import `bulma-kotlin` in your koltin project, if you use gradle, just add this in your dependencies:
 
-**Notes**:
+```gradle
+implementation("com.centyllion:bulma-kotlin:0.1.3")
+```
 
-- The Bulma CSS library isn't added by `bulma-kotlin`, a version must be available ([Getting started with Bulma](https://bulma.io/documentation/overview/start/))
-- `bulma-kotlin` is in its early days it needs maturing. The API is subject to changes especially the package name which is now just `bulma`.
+The Bulma CSS library isn't added by `bulma-kotlin`, a version must be available ([Getting started with Bulma](https://bulma.io/documentation/overview/start/))
+and explicit to allow further extensions to be added.
+
+## Few interesting facts
+
+`bulma-kotlin` relies a lot on [delegated properties](https://kotlinlang.org/docs/reference/delegated-properties.html) to handle Bulma element properties. 
+It helps to keep the code clear.
+The delegated classes can be found in [utils.kt](https://github.com/centyllion/bulma-kotlin/blob/master/src/main/kotlin/bulma/utils.kt).
+Implementing a new property is one liner:
+```kotlin
+// adds a property to handle the class `is-rounded` in the button
+var rounded by className(rounded, "is-rounded", root)
+```
+
+This method also apply to multiple children of an element. Here is the complete code for a [Box](https://bulma.io/documentation/elements/box):
+```kotlin
+/** [Box](https://bulma.io/documentation/elements/box) element. */
+class Box(vararg body: BulmaElement) : BulmaElement {
+    override val root: HTMLElement = document.create.div("box")
+
+    var body by bulmaList(body.toList(), root)
+}
+```
+
+When the value of a multiple element is changed a simple [diff](https://github.com/centyllion/bulma-kotlin/blob/master/src/main/kotlin/bulma/diff.kt) algorithm is apply to update the DOM.
 
 ## Change logs
 
@@ -43,5 +75,9 @@ To get started import `bulma-kotlin` in
 
 ### 0.1 and 0.1.1
 
-First import with all the elements and almost all the options with Bulma version `0.7.5`.
+First import with most of the elements and options with Bulma version `0.7.5`.
+
+The known missing elements are:
+- Tables ()
+- Radio groups
 
