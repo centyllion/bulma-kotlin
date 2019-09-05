@@ -1,13 +1,13 @@
 # Bulma-Kotlin
 
-`bulma-kotlin` is a Kotlin JS library that create and control [Bulma](https://bulma.io) elements.
+`bulma-kotlin` is a Kotlin JS library that creates and controls [Bulma](https://bulma.io) elements.
 It's developed and used at [Centyllion](https://centyllion.com) ([Twitter](https://twitter.com/centyllion)).
 
 
 **Notes**:
 - The project is in its early days it needs maturing. The API is subject to changes especially the package name which is now just `bulma`.
 - There is almost no documentation yet.
--  Some elements depends on Bulma extensions like (Toasts)[] and (Sliders)[https://wikiki.github.io/form/slider/], it needs to be sorted out 
+-  Some elements depends on Bulma extensions like [Toasts](https://github.com/rfoel/bulma-toast) and [Sliders](https://wikiki.github.io/form/slider), it needs to be sorted out 
 
 ## What's this ?
 
@@ -25,6 +25,7 @@ icon.rounded = true
 ``` 
 
 `bulma-kotlin` allows you to add simple callback on elements like buttons, inputs, etc.. 
+Since Bulma elements can be stacked, it's easy to build complex components.
 It also provides controllers that links data and Bulma elements. 
 Especially a special `MultipleController` that deals with lists.
 
@@ -59,7 +60,7 @@ class Box(vararg body: BulmaElement) : BulmaElement {
 }
 ```
 
-When the value of a multiple element is changed a simple [diff](https://github.com/centyllion/bulma-kotlin/blob/master/src/main/kotlin/bulma/diff.kt) algorithm is apply to update the DOM.
+When the value of a multiple element is changed a simple [diff](https://github.com/centyllion/bulma-kotlin/blob/master/src/main/kotlin/bulma/diff.kt) algorithm is applied to update the DOM.
 
 ## Change logs
 
@@ -68,6 +69,7 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 - Bug fix disable Select element.
 - Adds TagDelete element ([source](https://bulma.io/documentation/elements/tag/#modifiers)).
 - Adds size and add-ons for Tags ([source](https://bulma.io/documentation/elements/tag/#list-of-tags)).
+- Adds support for Delete inside a Tag.
 
 ### 0.1.2
 
