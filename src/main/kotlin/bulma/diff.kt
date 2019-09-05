@@ -1,5 +1,9 @@
 package bulma
 
+import org.w3c.dom.Element
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.get
+
 enum class DiffAction { Replaced, Added, Removed }
 
 /** Diff description */
@@ -84,4 +88,27 @@ internal fun <T> List<T>.applyDiff(diff: List<Diff<T>>): List<T> {
         }
     }
     return result
+}
+
+/** Computes differences between values and applies changes to container */
+fun <T> applyChanges(
+    oldValue: List<T>, value: List<T>,
+    container: HTMLElement, reference: Element?, position: Position?,
+    prepare: (T) -> HTMLElement
+) = oldValue.diff(value).forEach {
+    when (it.action) {
+        DiffAction.Added -> prepare(it.element).let { new ->
+            when {
+                container.childElementCount == 0 && reference != null -> container.insertBefore(new, reference)
+                container.childElementCount == 0 -> container.appendChild(new)
+                it.index < container.childElementCount -> container.insertBefore(new, container.children.item(it.index))
+                position != null -> container.insertAdjacentElement(position.value, new)
+                else -> container.appendChild(new)
+            }
+        }
+        DiffAction.Removed -> container.childNodes[it.index]?.let { container.removeChild(it) }
+        DiffAction.Replaced -> container.childNodes[it.index]?.let { toReplace ->
+            container.replaceChild(prepare(it.element), toReplace)
+        }
+    }
 }
