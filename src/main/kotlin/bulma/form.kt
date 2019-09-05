@@ -355,7 +355,7 @@ class Select(
             selectMultiple = value
         }
 
-    var disabled by booleanAttribute(false, "disabled", root)
+    var disabled by booleanAttribute(false, "disabled", selectNode)
 
     private var rootMultiple by className(multiple, "is-multiple", root)
     private var selectMultiple by booleanAttribute(multiple, "multiple", selectNode)
