@@ -36,6 +36,12 @@ enum class Size(override val className: String) : HasClassName {
     }
 }
 
+
+enum class TagsSize(override val className: String) : HasClassName {
+    None(""), Normal("are-normal"),
+    Medium("are-medium"), Large("are-large");
+}
+
 enum class FasSize(override val className: String) : HasClassName {
     None(""), Small("fa-sm"),
     Medium("fa-2x"), Large("fa-3x")

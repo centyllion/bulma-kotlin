@@ -6,8 +6,10 @@
 
 ### 0.1.3
 
-- Bug fix disable Select elements.
+- Bug fix disable Select element.
+- Adds TagDelete element ([source](https://bulma.io/documentation/elements/tag/#modifiers)).
+- Adds size and add-ons for Tags ([source](https://bulma.io/documentation/elements/tag/#list-of-tags)).
 
 ### 0.1.2
 
-- Bug fix Left and right icons for Control elements.
+- Bug fix Left and right icons for Control element.

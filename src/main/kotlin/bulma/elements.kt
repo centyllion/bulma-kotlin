@@ -235,11 +235,16 @@ class TagDelete(
 }
 
 /** [Tags](https://bulma.io/documentation/elements/tag/#list-of-tags) element */
-class Tags(tags: List<Tag> = emptyList()) : BulmaElement {
+class Tags(tags: List<Tag> = emptyList(), size: TagsSize = TagsSize.None, addons: Boolean = false) : BulmaElement {
 
     override val root: HTMLElement = document.create.div("tags")
 
     var tags by bulmaList(tags, root)
+
+    var size by className(size, root)
+
+    var addons by className(addons, "has-addons", root)
+
 }
 
 class Title(text: String, size: TextSize = TextSize.None) : BulmaElement {
