@@ -206,7 +206,8 @@ class ProgressBar : BulmaElement {
 /** [Tag](https://bulma.io/documentation/elements/tag) element. */
 class Tag(
     text: String, color: ElementColor = ElementColor.None,
-    size: Size = Size.None, rounded: Boolean = false
+    size: Size = Size.None, rounded: Boolean = false,
+    delete: Delete? = null
 ) : ControlElement {
 
     override val root: HTMLElement = document.create.span("tag") {
@@ -219,7 +220,7 @@ class Tag(
 
     var rounded by className(rounded, "is-rounded", root)
 
-    // TODO adds support for delete button
+    var delete by bulma(delete, root)
 }
 
 class TagDelete(
