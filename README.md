@@ -30,8 +30,12 @@ It also provides controllers that links data and Bulma elements.
 Especially a special `MultipleController` that deals with lists.
 
 
-To get started import `bulma-kotlin` in your koltin project, if you use gradle, just add this in your dependencies:
+To get started import `bulma-kotlin` in your Koltin project, if you use gradle, add the repository:
 
+```gradle
+maven("https://dl.bintray.com/centyllion/Libraries")
+```
+and the dependency:
 ```gradle
 implementation("com.centyllion:bulma-kotlin:0.1.3")
 ```
