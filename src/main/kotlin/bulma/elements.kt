@@ -222,8 +222,14 @@ class Tag(
     // TODO adds support for delete button
 }
 
-class TagDelete(rounded: Boolean = false): ControlElement {
+class TagDelete(
+    color: ElementColor = ElementColor.None, size: Size = Size.None, rounded: Boolean = false
+): ControlElement {
     override val root: HTMLElement = document.create.span("tag is-delete")
+
+    var color by className(color, root)
+
+    var size by className(size, root)
 
     var rounded by className(rounded, "is-rounded", root)
 }
