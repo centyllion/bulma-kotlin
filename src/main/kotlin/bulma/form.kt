@@ -28,7 +28,7 @@ import org.w3c.dom.HTMLSpanElement
 import org.w3c.dom.HTMLTextAreaElement
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.FocusEvent
-import org.w3c.dom.events.InputEvent
+import org.w3c.dom.events.UIEvent
 import org.w3c.files.FileList
 import kotlin.browser.document
 
@@ -173,7 +173,7 @@ interface TextView: ControlElement {
     var size: Size
 
     var onFocus: (Boolean) -> Unit
-    var onChange: (event: InputEvent, value: String) -> Unit
+    var onChange: (event: UIEvent, value: String) -> Unit
 }
 
 /** [Input](https://bulma.io/documentation/form/input/) */
@@ -183,7 +183,7 @@ class Input(
     rounded: Boolean = false, loading: Boolean = false,
     readonly: Boolean = false, static: Boolean = false,
     override var onFocus: (Boolean) -> Unit = { },
-    override var onChange: (event: InputEvent, value: String) -> Unit = { _, _ -> }
+    override var onChange: (event: UIEvent, value: String) -> Unit = { _, _ -> }
 ) : TextView {
 
     override val root = document.create.input(InputType.text, classes = "input") {
@@ -191,7 +191,7 @@ class Input(
         if (columns != null) this.size = "$columns"
         onInputFunction = {
             val target = it.target
-            if (it is InputEvent && target is HTMLInputElement) {
+            if (it is UIEvent && target is HTMLInputElement) {
                 onChange(it, target.value)
             }
         }
@@ -211,7 +211,7 @@ class Input(
         set(value) {
             if (root.value != value) {
                 root.value = value
-                onChange(InputEvent("change"), value)
+                onChange(UIEvent("change"), value)
             }
         }
 
@@ -241,14 +241,14 @@ class TextArea(
     color: ElementColor = ElementColor.None, size: Size = Size.None,
     loading: Boolean = false, readonly: Boolean = false, static: Boolean = false, fixedSize: Boolean = false,
     override var onFocus: (Boolean) -> Unit = { },
-    override var onChange: (event: InputEvent, value: String) -> Unit = { _, _ -> }
+    override var onChange: (event: UIEvent, value: String) -> Unit = { _, _ -> }
 ) : TextView {
 
     override val root: HTMLTextAreaElement = document.create.textArea(classes = "textarea") {
         +value
         onInputFunction = {
             val target = it.target
-            if (it is InputEvent && target is HTMLTextAreaElement) {
+            if (it is UIEvent && target is HTMLTextAreaElement) {
                 onChange(it, target.value)
             }
         }
@@ -270,7 +270,7 @@ class TextArea(
         set(value) {
             if (root.value != value) {
                 root.value = value
-                onChange(InputEvent("change"), value)
+                onChange(UIEvent("change"), value)
             }
         }
 
