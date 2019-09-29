@@ -68,6 +68,10 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 
 ## Change logs
 
+### 0.1.6
+
+- Adds support for [Switch](https://wikiki.github.io/form/switch/) extension 
+
 ### 0.1.5
 
 - Removes reference to InputEvent which isn't supported by Edge.
