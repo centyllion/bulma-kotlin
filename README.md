@@ -68,6 +68,14 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 
 ## Change logs
 
+### 0.1.7
+
+- Adds Table element
+- Adds variable gap for Columns
+- Adds support for `is-circle` on Slider
+- Moves slider to extension
+- Moves toast to extension
+
 ### 0.1.6
 
 - Adds support for [Switch](https://wikiki.github.io/form/switch/) extension 
@@ -92,6 +100,6 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 First import with most of the elements and options with Bulma version `0.7.5`.
 
 The known missing elements are:
-- Tables ()
+- Tables
 - Radio groups
 
