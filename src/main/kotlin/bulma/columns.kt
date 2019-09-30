@@ -31,11 +31,25 @@ enum class ColumnSize(override val className: String) : HasClassName {
     S12("is-12")
 }
 
+enum class ColumnsGap(override val className: String) : HasClassName {
+    None(""),
+    S0("is-0"),
+    S1("is-1"),
+    S2("is-2"),
+    S3("is-3"),
+    S4("is-4"),
+    S5("is-5"),
+    S6("is-6"),
+    S7("is-7"),
+    S8("is-8")
+}
+
 /** [Columns](https://bulma.io/documentation/columns) element */
 class Columns(
     vararg columns: Column,
     multiline: Boolean = false, mobile: Boolean = false, desktop: Boolean = false,
-    gapless: Boolean = false, centered: Boolean = false, vcentered: Boolean = false
+    gapless: Boolean = false, centered: Boolean = false, vcentered: Boolean = false,
+    gap: ColumnsGap = ColumnsGap.None
 ) : BulmaElement {
 
     override val root: HTMLElement = document.create.div("columns")
@@ -56,7 +70,8 @@ class Columns(
     /** [VCentered](https://bulma.io/documentation/columns/options/#vertical-alignment) */
     var vcentered by className(vcentered, "is-vcentered", root)
 
-    // TODO variable gap  https://bulma.io/documentation/columns/gap/#variable-gap
+    /** [Variable Gap](https://bulma.io/documentation/columns/gap/#variable-gap) */
+    var gap by className(gap, root)
 
     var columns by bulmaList(columns.toList(), root)
 }
