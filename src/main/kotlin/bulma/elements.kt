@@ -9,10 +9,18 @@ import kotlinx.html.h1
 import kotlinx.html.i
 import kotlinx.html.img
 import kotlinx.html.js.onClickFunction
+import kotlinx.html.js.table
+import kotlinx.html.js.tbody
+import kotlinx.html.js.td
+import kotlinx.html.js.tfoot
+import kotlinx.html.js.th
+import kotlinx.html.js.thead
+import kotlinx.html.js.tr
 import kotlinx.html.progress
 import kotlinx.html.span
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLImageElement
+import org.w3c.dom.HTMLTableElement
 import kotlin.browser.document
 
 /** [Box](https://bulma.io/documentation/elements/box) element. */
@@ -198,10 +206,53 @@ class ProgressBar : BulmaElement {
     var value by intAttribute(null, "value", root)
 
     var max by intAttribute(null, "max", root)
-
 }
 
-// TODO adds support for Table
+class TableHeaderCell(text: String = "", vararg body: BulmaElement = emptyArray()): BulmaElement {
+    override val root = document.create.th { +text }
+    var body by bulmaList(body.asList(), root)
+}
+
+class TableHeaderRow(vararg cells: TableHeaderCell = emptyArray()): BulmaElement {
+    override val root = document.create.tr()
+    var cells by bulmaList(cells.asList(), root)
+}
+
+class TableCell(text: String = "", vararg body: BulmaElement = emptyArray()): BulmaElement {
+    override val root = document.create.td { +text }
+    var body by bulmaList(body.asList(), root)
+}
+
+class TableRow(vararg cells: TableCell = emptyArray()): BulmaElement {
+    override val root = document.create.tr()
+    var cells by bulmaList(cells.asList(), root)
+}
+
+/** [Table](https://bulma.io/documentation/elements/table) */
+class Table(
+    body: List<TableRow> = emptyList(), head: List<TableHeaderRow> = emptyList(), foot: List<TableHeaderRow> = emptyList(),
+    bordered: Boolean = false, striped: Boolean = false, narrow: Boolean = false,
+    hoverable: Boolean = false, fullWidth: Boolean = false
+) : BulmaElement {
+
+    override val root: HTMLTableElement = document.create.table("table")
+
+    var head by
+        embeddedBulmaList(head, root, Position.AfterBegin) { document.create.thead() }
+
+    var body by
+        embeddedBulmaList(body, root, Position.AfterBegin) { document.create.tbody() }
+
+    var foot by
+        embeddedBulmaList(foot, root, Position.BeforeEnd) { document.create.tfoot() }
+
+    var bordered by className(bordered, "is-bordered", root)
+    var striped by className(striped, "is-striped", root)
+    var narrow by className(narrow, "is-narrow", root)
+    var hoverable by className(hoverable, "is-hoverable", root)
+    var fullWidth by className(fullWidth, "is-fullwidth", root)
+}
+
 
 /** [Tag](https://bulma.io/documentation/elements/tag) element. */
 class Tag(
