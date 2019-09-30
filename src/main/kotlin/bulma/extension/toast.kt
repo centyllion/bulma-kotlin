@@ -1,4 +1,4 @@
-package bulmatoast
+package bulma.extension
 
 class ToastAnimation(
     val `in`: String,
