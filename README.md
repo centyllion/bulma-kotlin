@@ -68,6 +68,10 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 
 ## Change logs
 
+## 0.2
+
+- Adds @JsModule imports for bulmaToast
+
 ### 0.1.7
 
 - Adds Table element

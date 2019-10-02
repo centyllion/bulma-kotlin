@@ -29,4 +29,5 @@ external interface BulmaToast {
     fun toast(options: ToastOptions = definedExternally)
 }
 
-lateinit var bulmaToast: BulmaToast
+@JsModule("bulmaToast")
+external val bulmaToast: BulmaToast
