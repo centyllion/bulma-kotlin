@@ -76,7 +76,7 @@ fun <T> html(
     prepare: (newValue: T) -> HTMLElement?
 ) = BulmaElementProperty(initialValue, parent, position, onChange, prepare)
 
-class BulmaElementListProperty<T : BulmaElement>(
+class BulmaElementListProperty<T>(
     initialValue: List<T>,
     val parent: HTMLElement,
     val before: () -> Element?,
@@ -114,7 +114,13 @@ fun <T : BulmaElement> bulmaList(
     prepare: (T) -> HTMLElement = { it.root }
 ) = BulmaElementListProperty(initialValue, parent, before, Position.BeforeEnd, prepare)
 
-class BulmaElementEmbeddedListProperty<T : BulmaElement>(
+fun <T> htmlList(
+    initialValue: List<T> = emptyList(), parent: HTMLElement,
+    before: () -> Element? = { null },
+    prepare: (T) -> HTMLElement
+) = BulmaElementListProperty(initialValue, parent, before, Position.BeforeEnd, prepare)
+
+class BulmaElementEmbeddedListProperty<T>(
     initialValue: List<T>,
     val parent: HTMLElement,
     val before: () -> Element?,
@@ -170,6 +176,13 @@ class BulmaElementEmbeddedListProperty<T : BulmaElement>(
 fun <T : BulmaElement> embeddedBulmaList(
     initialValue: List<T> = emptyList(), parent: HTMLElement,
     position: Position = Position.BeforeEnd, prepare: (T) -> HTMLElement = { it.root },
+    containerBuilder: (List<T>) -> HTMLElement
+) =
+    BulmaElementEmbeddedListProperty(initialValue, parent, { null }, position, prepare, containerBuilder)
+
+fun <T> embeddedHtmlList(
+    initialValue: List<T> = emptyList(), parent: HTMLElement,
+    position: Position = Position.BeforeEnd, prepare: (T) -> HTMLElement,
     containerBuilder: (List<T>) -> HTMLElement
 ) =
     BulmaElementEmbeddedListProperty(initialValue, parent, { null }, position, prepare, containerBuilder)
