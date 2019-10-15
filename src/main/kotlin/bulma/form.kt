@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package bulma
 
 import kotlinx.html.InputType
@@ -31,6 +33,7 @@ import org.w3c.dom.events.FocusEvent
 import org.w3c.dom.events.UIEvent
 import org.w3c.files.FileList
 import kotlin.browser.document
+import kotlin.random.Random
 
 interface FieldElement : BulmaElement
 
@@ -217,7 +220,10 @@ class Input(
 
     override var placeholder by attribute(placeholder, "placeholder", root)
 
-    // TODO support input type (text, password, email, tel)
+    /** Input type, can be `text`, `password`, 'email`, 'tel`. */
+    var type
+        get() = root.type
+        set(value) { root.type = value }
 
     override var color by className(color, root)
 
@@ -398,7 +404,27 @@ class Checkbox(
 
 }
 
-// TODO radio groups http://bulma.io/documentation/form/radio/
+/** (Radio groups)[http://bulma.io/documentation/form/radio/] elements */
+class Radio(
+    vararg elements: String, checked: String? = null, onChange: (Radio, String) -> Unit = { _, _ -> }
+): FieldElement {
+
+    private val name = "radio-name-${Random.nextLong()}"
+
+    override val root: HTMLElement = document.create.div("control")
+
+    var elements by htmlList(elements.toList(), root) { element ->
+        document.create.label("radio") {
+            input(InputType.radio, name = name) {
+                this.checked = (element == checked)
+                onChangeFunction = { onChange(this@Radio, element) }
+            }
+            +element
+        }
+    }
+    // TODO add support for checked property
+}
+
 
 /** (File)[https://bulma.io/documentation/form/file/] element */
 class FileInput(
