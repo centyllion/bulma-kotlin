@@ -5,6 +5,18 @@ import org.w3c.dom.HTMLElement
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
+interface Bulma {
+    var logDiffs: Boolean
+
+    fun logDiffs(message: () -> String) {
+        if (logDiffs) println("[bulma.logDiffs] ${message()}")
+    }
+}
+
+val bulma = object: Bulma {
+    override var logDiffs: Boolean = false
+}
+
 /** Position where to insert on node using `insertAdjacentElement`. */
 enum class Position(val value: String) {
     BeforeBegin("beforebegin"), AfterBegin("afterbegin"),

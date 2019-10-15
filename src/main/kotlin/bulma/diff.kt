@@ -2,6 +2,7 @@ package bulma
 
 import org.w3c.dom.Element
 import org.w3c.dom.HTMLElement
+import org.w3c.dom.asList
 import org.w3c.dom.get
 
 enum class DiffAction { Replaced, Added, Removed }
@@ -14,7 +15,7 @@ data class Diff<T>(val action: DiffAction, val index: Int, val element: T)
  * It returns a list of [Diff] that describes the changes. The result is
  * sequential and the [Diff]s must be applied in order to be valid.
  */
-internal fun <T> List<T>.diff(other: List<T>, equality: (T, T) -> Boolean = { a, b -> a == b }): List<Diff<T>> {
+fun <T> List<T>.diff(other: List<T>, equality: (T, T) -> Boolean = { a, b -> a == b }): List<Diff<T>> {
     var iSource = 0
     var iOther = 0
 
@@ -78,7 +79,7 @@ internal fun <T> List<T>.diff(other: List<T>, equality: (T, T) -> Boolean = { a,
 
 
 /** From a list of [Diff] ([diff]) it computes the result one */
-internal fun <T> List<T>.applyDiff(diff: List<Diff<T>>): List<T> {
+fun <T> List<T>.applyDiff(diff: List<Diff<T>>): List<T> {
     val result = this.toMutableList()
     diff.forEach {
         when (it.action) {
@@ -95,20 +96,36 @@ fun <T> applyChanges(
     oldValue: List<T>, value: List<T>,
     container: HTMLElement, reference: Element?, position: Position?,
     prepare: (T) -> HTMLElement
-) = oldValue.diff(value).forEach {
-    when (it.action) {
-        DiffAction.Added -> prepare(it.element).let { new ->
-            when {
-                container.childElementCount == 0 && reference != null -> container.insertBefore(new, reference)
-                container.childElementCount == 0 -> container.appendChild(new)
-                it.index < container.childElementCount -> container.insertBefore(new, container.children.item(it.index))
-                position != null -> container.insertAdjacentElement(position.value, new)
-                else -> container.appendChild(new)
+) {
+    // computes differences between lists.
+    val diff = oldValue.diff(value)
+    // log diffs
+    bulma.logDiffs {
+        val added = diff.count { it.action == DiffAction.Added }
+        val removed = diff.count { it.action == DiffAction.Removed }
+        val replaced = diff.count { it.action == DiffAction.Replaced }
+        val anchor = "${container.tagName}${container.classList.asList().map { ".$it"} }"
+        "Applying ${diff.size} changes (ad: $added, rd: $removed, rp: $replaced) to $anchor"
+    }
+    diff.forEach {
+        // for each element of the diff applies the changes to the DOM doing the less modification as possible
+        when (it.action) {
+            DiffAction.Added -> prepare(it.element).let { new ->
+                when {
+                    container.childElementCount == 0 && reference != null -> container.insertBefore(new, reference)
+                    container.childElementCount == 0 -> container.appendChild(new)
+                    it.index < container.childElementCount -> container.insertBefore(
+                        new,
+                        container.children.item(it.index)
+                    )
+                    position != null -> container.insertAdjacentElement(position.value, new)
+                    else -> container.appendChild(new)
+                }
             }
-        }
-        DiffAction.Removed -> container.childNodes[it.index]?.let { container.removeChild(it) }
-        DiffAction.Replaced -> container.childNodes[it.index]?.let { toReplace ->
-            container.replaceChild(prepare(it.element), toReplace)
+            DiffAction.Removed -> container.childNodes[it.index]?.let { container.removeChild(it) }
+            DiffAction.Replaced -> container.childNodes[it.index]?.let { toReplace ->
+                container.replaceChild(prepare(it.element), toReplace)
+            }
         }
     }
 }
