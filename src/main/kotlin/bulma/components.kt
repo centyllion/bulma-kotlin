@@ -228,7 +228,6 @@ class Dropdown(
         }
     }
 
-    private val triggerNode = root.querySelector("div.dropdown-trigger") as HTMLDivElement
     private val buttonNode = root.querySelector("button.button") as HTMLButtonElement
     private val toggleNode = root.querySelector("span.icon.is-small") as HTMLSpanElement
     private val titleNode = root.querySelector(".dropdown-title") as HTMLSpanElement

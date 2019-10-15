@@ -193,19 +193,22 @@ class Notification(
 }
 
 /** [Progress Bar](https://bulma.io/documentation/elements/progress) element. */
-class ProgressBar : BulmaElement {
+class ProgressBar(
+    color: ElementColor = ElementColor.None, size: Size = Size.None,
+    min: Int? = null, max: Int? = null, value: Int? = null
+) : BulmaElement {
 
     override val root: HTMLElement = document.create.progress("progress")
 
-    var color by className(ElementColor.None, root)
+    var color by className(color, root)
 
-    var size by className(Size.None, root)
+    var size by className(size, root)
 
-    var min by intAttribute(null, "min", root)
+    var min by intAttribute(min, "min", root)
 
-    var value by intAttribute(null, "value", root)
+    var value by intAttribute(value, "value", root)
 
-    var max by intAttribute(null, "max", root)
+    var max by intAttribute(max, "max", root)
 }
 
 class TableHeaderCell(text: String = "", vararg body: BulmaElement = emptyArray()): BulmaElement {
