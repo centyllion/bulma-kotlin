@@ -68,6 +68,13 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 
 ## Change logs
 
+## 0.2.1
+
+- Adds log when applying diff
+- Better constructor for ProgressBar
+- Support for input type
+- Adds Radio button element
+
 ## 0.2
 
 - Adds @JsModule imports for bulmaToast
