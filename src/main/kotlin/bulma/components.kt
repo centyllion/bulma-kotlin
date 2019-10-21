@@ -511,7 +511,7 @@ class NavBar(
 
     var start by embeddedBulmaList(start, menuNode, Position.AfterBegin) { document.create.div("navbar-start") }
 
-    var end by embeddedBulmaList(end, menuNode, Position.AfterBegin) { document.create.div("navbar-end") }
+    var end by embeddedBulmaList(end, menuNode, Position.BeforeEnd) { document.create.div("navbar-end") }
 
     var active: Boolean
         get() = menuNode.classList.contains("is-active")
