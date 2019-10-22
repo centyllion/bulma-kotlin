@@ -68,6 +68,13 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 
 ## Change logs
 
+## 0.3.0
+
+- Adds support for Bulma `0.8.0`:
+  - Support of `is-light` for buttons.
+  - Support of colors for panels. 
+- Corrects NavBar bug with end placement.
+
 ## 0.2.1
 
 - Adds log when applying diff

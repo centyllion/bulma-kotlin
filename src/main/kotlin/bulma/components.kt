@@ -667,13 +667,17 @@ class PanelContentBlock(vararg content: BulmaElement) : PanelItem {
 }
 
 /** [Panel](https://bulma.io/documentation/components/panel) */
-class Panel(text: String, vararg items: PanelItem) : BulmaElement {
+class Panel(
+    text: String, vararg items: PanelItem, color: ElementColor = ElementColor.None
+) : BulmaElement {
 
     override val root: HTMLElement = document.create.nav("panel") {
         p("panel-heading") { +text }
     }
 
     var items by embeddedBulmaList(items.toList(), root) { document.create.div() }
+
+    var color by className(color, root)
 }
 
 class TabItem(

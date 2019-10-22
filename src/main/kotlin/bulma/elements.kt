@@ -34,7 +34,7 @@ class Box(vararg body: BulmaElement) : BulmaElement {
 class Button(
     title: String? = null, icon: Icon? = null, color: ElementColor = ElementColor.None,
     rounded: Boolean = false, outlined: Boolean = false, inverted: Boolean = false, size: Size = Size.None,
-    disabled: Boolean = false, var onClick: (Button) -> Unit = {}
+    light: Boolean = false, disabled: Boolean = false, var onClick: (Button) -> Unit = {}
 ) : ControlElement {
 
     override val root: HTMLElement = document.create.button(classes = "button") {
@@ -56,6 +56,9 @@ class Button(
 
     var color by className(color, root)
 
+    /** Adds support for [light colors](https://bulma.io/documentation/elements/button/#colors) (since `0.8.0). */
+    var light by className(light, "is-light", root)
+
     var size by className(size, root)
 
     var disabled by booleanAttribute(disabled, "disabled", root)
@@ -63,16 +66,16 @@ class Button(
 }
 
 fun iconButton(
-    icon: Icon? = null, color: ElementColor = ElementColor.None,
-    rounded: Boolean = false, outlined: Boolean = false, inverted: Boolean = false, size: Size = Size.None,
-    disabled: Boolean = false, onClick: (Button) -> Unit = {}
-) = Button(null, icon, color, rounded, outlined, inverted, size, disabled, onClick)
+    icon: Icon? = null, color: ElementColor = ElementColor.None, rounded: Boolean = false,
+    outlined: Boolean = false, inverted: Boolean = false, size: Size = Size.None,
+    light: Boolean = false, disabled: Boolean = false, onClick: (Button) -> Unit = {}
+) = Button(null, icon, color, rounded, outlined, inverted, size, light,  disabled, onClick)
 
 fun textButton(
-    title: String? = null, color: ElementColor = ElementColor.None,
-    rounded: Boolean = false, outlined: Boolean = false, inverted: Boolean = false, size: Size = Size.None,
-    disabled: Boolean = false, onClick: (Button) -> Unit = {}
-) = Button(title, null, color, rounded, outlined, inverted, size, disabled, onClick)
+    title: String? = null, color: ElementColor = ElementColor.None, rounded: Boolean = false,
+    outlined: Boolean = false, inverted: Boolean = false, size: Size = Size.None,
+    light: Boolean = false, disabled: Boolean = false, onClick: (Button) -> Unit = {}
+) = Button(title, null, color, rounded, outlined, inverted, size, light, disabled, onClick)
 
 /** [Content](https://bulma.io/documentation/elements/content) element. */
 class Content(block: DIV.() -> Unit = {}) : BulmaElement {
