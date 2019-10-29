@@ -77,6 +77,22 @@ fun textButton(
     light: Boolean = false, disabled: Boolean = false, onClick: (Button) -> Unit = {}
 ) = Button(title, null, color, rounded, outlined, inverted, size, light, disabled, onClick)
 
+/** [List of buttons](https://bulma.io/documentation/elements/button/#list-of-buttons). */
+class ButtonsList(
+    vararg buttons: Button, size: ButtonsSize = ButtonsSize.None,
+    aligned: Alignment = Alignment.Left, addons: Boolean = false
+) : BulmaElement {
+    override val root: HTMLElement = document.create.div("buttons")
+
+    var size by className(size, root)
+
+    var aligned by className(aligned, root)
+
+    var addons by className(addons, "has-addons", root)
+
+    var buttons by bulmaList(buttons.toList(), root)
+}
+
 /** [Content](https://bulma.io/documentation/elements/content) element. */
 class Content(block: DIV.() -> Unit = {}) : BulmaElement {
     override val root: HTMLElement = document.create.div("content") {
@@ -263,7 +279,7 @@ class Table(
 /** [Tag](https://bulma.io/documentation/elements/tag) element. */
 class Tag(
     text: String, color: ElementColor = ElementColor.None,
-    size: Size = Size.None, rounded: Boolean = false,
+    size: Size = Size.None, rounded: Boolean = false, light: Boolean = false,
     delete: Delete? = null
 ) : ControlElement {
 
@@ -276,6 +292,9 @@ class Tag(
     var size by className(size, root)
 
     var rounded by className(rounded, "is-rounded", root)
+
+    /** Adds support for [light colors](https://bulma.io/documentation/elements/button/#colors) (since `0.8.0). */
+    var light by className(light, "is-light", root)
 
     var delete by bulma(delete, root)
 }

@@ -36,6 +36,10 @@ enum class Size(override val className: String) : HasClassName {
     }
 }
 
+enum class ButtonsSize(override val className: String) : HasClassName {
+    None(""), Small("are-small"),
+    Medium("are-medium"), Large("are-large");
+}
 
 enum class TagsSize(override val className: String) : HasClassName {
     None(""), Normal("are-normal"),

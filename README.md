@@ -68,6 +68,11 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 
 ## Change logs
 
+## 0.3.1
+
+- Adds Buttons list
+- Adds `is-light` for tags.
+
 ## 0.3.0
 
 - Adds support for Bulma `0.8.0`:
