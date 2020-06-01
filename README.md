@@ -63,7 +63,7 @@ class Box(vararg body: BulmaElement) : BulmaElement {
 }
 ```
 
-When the value of a multiple element is changed a simple [diff](https://github.com/centyllion/bulma-kotlin/blob/master/src/main/kotlin/bulma/diff.kt) algorithm is applied to update the DOM.
+When the value of multiple elements has changed a simple [diff](https://github.com/centyllion/bulma-kotlin/blob/master/src/main/kotlin/bulma/diff.kt) algorithm is applied to update the DOM.
 
 ## Change logs
 
