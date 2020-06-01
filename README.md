@@ -3,7 +3,6 @@
 `bulma-kotlin` is a Kotlin JS library that creates and controls [Bulma](https://bulma.io) elements.
 It's developed and used at [Centyllion](https://centyllion.com) ([Twitter](https://twitter.com/centyllion)).
 
-
 **Notes**:
 - The project is in its early days it needs maturing. The API is subject to changes especially the package name which is now just `bulma`.
 - There is almost no documentation yet.
@@ -37,7 +36,7 @@ maven("https://dl.bintray.com/centyllion/Libraries")
 ```
 and the dependency:
 ```gradle
-implementation("com.centyllion:bulma-kotlin:0.1.3")
+implementation("com.centyllion:bulma-kotlin:0.3.1")
 ```
 
 The Bulma CSS library isn't added by `bulma-kotlin`, a version must be available ([Getting started with Bulma](https://bulma.io/documentation/overview/start/))
@@ -67,6 +66,10 @@ class Box(vararg body: BulmaElement) : BulmaElement {
 When the value of a multiple element is changed a simple [diff](https://github.com/centyllion/bulma-kotlin/blob/master/src/main/kotlin/bulma/diff.kt) algorithm is applied to update the DOM.
 
 ## Change logs
+
+## Current
+
+- `PanelTabsItem.onClick` can now be modified after creation.
 
 ## 0.3.1
 

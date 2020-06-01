@@ -608,7 +608,7 @@ class Pagination(
 
 interface PanelItem : BulmaElement
 
-class PanelTabsItem(text: String, onClick: (PanelTabsItem) -> Unit = {}) : BulmaElement {
+class PanelTabsItem(text: String, var onClick: (PanelTabsItem) -> Unit = {}) : BulmaElement {
 
     override val root: HTMLElement = document.create.a {
         +text
