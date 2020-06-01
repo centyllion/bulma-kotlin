@@ -69,6 +69,7 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 
 ## Current
 
+- Adds support for column offsets.
 - `PanelTabsItem.onClick` can now be modified after creation.
 - `Delete.onClick` can now be modified after creation.
 
