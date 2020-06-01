@@ -1,13 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 import java.util.Date
 
-val kotlinx_html_version: String by project
+val kotlinx_html_version: String = "0.7.1"
+
 
 group = "com.centyllion"
 version = versioning.info.base
 
 plugins {
-    id("kotlin2js") version "1.3.50"
+    id("kotlin2js") version "1.3.72"
     id("fr.coppernic.versioning") version "3.1.2"
     id("com.jfrog.bintray") version "1.8.4"
     id("maven-publish")
