@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package bulma
 
 import org.w3c.dom.Element
@@ -98,33 +99,33 @@ fun <T> applyChanges(
     prepare: (T) -> HTMLElement
 ) {
     // computes differences between lists.
-    val diff = oldValue.diff(value)
+    val diffs = oldValue.diff(value)
     // log diffs
     bulma.logDiffs {
-        val added = diff.count { it.action == DiffAction.Added }
-        val removed = diff.count { it.action == DiffAction.Removed }
-        val replaced = diff.count { it.action == DiffAction.Replaced }
+        val added = diffs.count { it.action == DiffAction.Added }
+        val removed = diffs.count { it.action == DiffAction.Removed }
+        val replaced = diffs.count { it.action == DiffAction.Replaced }
         val anchor = "${container.tagName}${container.classList.asList().map { ".$it"} }"
-        "Applying ${diff.size} changes (ad: $added, rd: $removed, rp: $replaced) to $anchor"
+        "Applying ${diffs.size} changes (ad: $added, rd: $removed, rp: $replaced) to $anchor"
     }
-    diff.forEach {
+    diffs.forEach { diff ->
         // for each element of the diff applies the changes to the DOM doing the less modification as possible
-        when (it.action) {
-            DiffAction.Added -> prepare(it.element).let { new ->
+        when (diff.action) {
+            DiffAction.Added -> prepare(diff.element).let { new ->
                 when {
                     container.childElementCount == 0 && reference != null -> container.insertBefore(new, reference)
                     container.childElementCount == 0 -> container.appendChild(new)
-                    it.index < container.childElementCount -> container.insertBefore(
+                    diff.index < container.childElementCount -> container.insertBefore(
                         new,
-                        container.children.item(it.index)
+                        container.children.item(diff.index)
                     )
                     position != null -> container.insertAdjacentElement(position.value, new)
                     else -> container.appendChild(new)
                 }
             }
-            DiffAction.Removed -> container.childNodes[it.index]?.let { container.removeChild(it) }
-            DiffAction.Replaced -> container.childNodes[it.index]?.let { toReplace ->
-                container.replaceChild(prepare(it.element), toReplace)
+            DiffAction.Removed -> container.childNodes[diff.index]?.let { container.removeChild(it) }
+            DiffAction.Replaced -> container.childNodes[diff.index]?.let { toReplace ->
+                container.replaceChild(prepare(diff.element), toReplace)
             }
         }
     }

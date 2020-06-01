@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package bulma
 
 import org.w3c.dom.Element

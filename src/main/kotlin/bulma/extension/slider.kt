@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package bulma.extension
 
 import bulma.ControlElement

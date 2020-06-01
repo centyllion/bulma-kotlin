@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package bulma
 
 import kotlinx.html.a
@@ -276,7 +277,7 @@ class Dropdown(
             menuNode.style.width = value
         }
 
-    var disabled by observable(false) { _, old, new ->
+    var disabled by observable(false) { _, _, new ->
         toggleNode.classList.toggle("is-hidden", new)
     }
 }

@@ -1,5 +1,4 @@
-@file:Suppress("unused")
-
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package bulma
 
 import kotlinx.html.InputType

@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package bulma
 
 import kotlinx.html.dom.create

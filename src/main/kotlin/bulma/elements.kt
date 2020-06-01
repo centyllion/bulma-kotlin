@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package bulma
 
 import kotlinx.html.DIV
@@ -93,7 +94,11 @@ class ButtonsList(
     var buttons by bulmaList(buttons.toList(), root)
 }
 
-/** [Content](https://bulma.io/documentation/elements/content) element. */
+/**
+ * [Content](https://bulma.io/documentation/elements/content) element.
+ *
+ * [Content] holds classic HTML so its connected to a HTML builder bloc.
+ * */
 class Content(block: DIV.() -> Unit = {}) : BulmaElement {
     override val root: HTMLElement = document.create.div("content") {
         block()
