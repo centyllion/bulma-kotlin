@@ -70,6 +70,7 @@ When the value of a multiple element is changed a simple [diff](https://github.c
 ## Current
 
 - `PanelTabsItem.onClick` can now be modified after creation.
+- `Delete.onClick` can now be modified after creation.
 
 ## 0.3.1
 
