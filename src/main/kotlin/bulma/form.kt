@@ -20,13 +20,7 @@ import kotlinx.html.js.textArea
 import kotlinx.html.label
 import kotlinx.html.select
 import kotlinx.html.span
-import org.w3c.dom.HTMLElement
-import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.HTMLLabelElement
-import org.w3c.dom.HTMLOptionElement
-import org.w3c.dom.HTMLSelectElement
-import org.w3c.dom.HTMLSpanElement
-import org.w3c.dom.HTMLTextAreaElement
+import org.w3c.dom.*
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.FocusEvent
 import org.w3c.dom.events.UIEvent
@@ -297,7 +291,7 @@ class TextArea(
 
 }
 
-class Option(text: String, value: String = "") : BulmaElement {
+class Option(text: String, value: String = text) : BulmaElement {
     override val root: HTMLElement = document.create.option {
         +text
         this.value = value
@@ -319,7 +313,7 @@ class Select(
     options: List<Option> = emptyList(), selectedIndex: Int = 0, color: ElementColor = ElementColor.None,
     size: Size = Size.None, rounded: Boolean = false,
     loading: Boolean = false, multiple: Boolean = false,
-    onChange: (event: Event, value: String) -> Unit = { _, _ -> }
+    onChange: (event: Event, selected: List<Option>) -> Unit = { _, _ -> }
 ) : ControlElement {
 
     override val root: HTMLElement = document.create.div("select") {
@@ -327,8 +321,13 @@ class Select(
             onInputFunction = {
                 val target = it.target
                 if (target is HTMLSelectElement) {
-                    // TODO support multiple
-                    onChange(it, target.value)
+                    val selectedOptions = target.selectedOptions
+                    // creates a list with all [Option] by finding them by value
+                    val translated = List(selectedOptions.length) {
+                        val value = (selectedOptions[it] as org.w3c.dom.Option).value
+                        options.find { it.value == value }
+                    }.filterNotNull()
+                    onChange(it, translated)
                 }
             }
         }
@@ -364,7 +363,6 @@ class Select(
 
     private var rootMultiple by className(multiple, "is-multiple", root)
     private var selectMultiple by booleanAttribute(multiple, "multiple", selectNode)
-
 }
 
 /** [Checkbox](https://bulma.io/documentation/form/checkbox) */

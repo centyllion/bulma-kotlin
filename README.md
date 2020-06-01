@@ -69,6 +69,7 @@ When the value of multiple elements has changed a simple [diff](https://github.c
 
 ## Current
 
+- Adds support for multiple select (API change on the listener to a list of Option).
 - Adds support for column offsets.
 - `PanelTabsItem.onClick` can now be modified after creation.
 - `Delete.onClick` can now be modified after creation.
