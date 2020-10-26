@@ -15,7 +15,7 @@ import kotlinx.html.label
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.HTMLLabelElement
 import org.w3c.dom.events.Event
-import kotlin.browser.document
+import kotlinx.browser.document
 import kotlin.random.Random
 
 /** [Switch](https://wikiki.github.io/form/switch/) */

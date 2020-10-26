@@ -4,7 +4,7 @@ package bulma
 import kotlinx.html.dom.create
 import kotlinx.html.js.div
 import org.w3c.dom.HTMLElement
-import kotlin.browser.document
+import kotlinx.browser.document
 
 enum class ColumnSize(override val className: String) : HasClassName {
     None(""),

@@ -25,7 +25,7 @@ import org.w3c.dom.events.Event
 import org.w3c.dom.events.FocusEvent
 import org.w3c.dom.events.UIEvent
 import org.w3c.files.FileList
-import kotlin.browser.document
+import kotlinx.browser.document
 import kotlin.random.Random
 
 interface FieldElement : BulmaElement

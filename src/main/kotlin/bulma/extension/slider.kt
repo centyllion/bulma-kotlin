@@ -12,7 +12,7 @@ import kotlinx.html.js.input
 import kotlinx.html.js.onInputFunction
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.events.Event
-import kotlin.browser.document
+import kotlinx.browser.document
 
 /**
  * [Slider](https://wikiki.github.io/form/slider/) element .

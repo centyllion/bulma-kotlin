@@ -28,7 +28,7 @@ import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLParagraphElement
 import org.w3c.dom.HTMLSpanElement
 import org.w3c.dom.HTMLUListElement
-import kotlin.browser.document
+import kotlinx.browser.document
 import kotlin.collections.set
 import kotlin.properties.Delegates.observable
 

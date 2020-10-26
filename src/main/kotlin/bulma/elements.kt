@@ -22,7 +22,7 @@ import kotlinx.html.span
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLImageElement
 import org.w3c.dom.HTMLTableElement
-import kotlin.browser.document
+import kotlinx.browser.document
 
 /** [Box](https://bulma.io/documentation/elements/box) element. */
 class Box(vararg body: BulmaElement) : BulmaElement {

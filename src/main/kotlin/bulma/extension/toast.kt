@@ -30,5 +30,6 @@ external interface BulmaToast {
     fun toast(options: ToastOptions = definedExternally)
 }
 
-@JsModule("bulmaToast")
+@JsModule("bulma-toast")
+@JsNonModule
 external val bulmaToast: BulmaToast

@@ -15,7 +15,7 @@ import kotlinx.html.span
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLElement
-import kotlin.browser.document
+import kotlinx.browser.document
 
 class HtmlWrapper<Html : HTMLElement>(override val root: Html) : BulmaElement
 
