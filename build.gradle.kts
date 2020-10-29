@@ -17,9 +17,13 @@ apply {
     plugin("com.jfrog.bintray")
 }
 
+
 repositories {
     jcenter()
-    maven ("https://dl.bintray.com/kotlin/kotlin-eap")
+}
+
+kotlin {
+    js { browser() }
 }
 
 dependencies {
@@ -31,25 +35,10 @@ dependencies {
     testImplementation(kotlin("test-js"))
 }
 
-kotlin {
-    js {
-        browser {
-        }
-    }
-}
-
 tasks {
-    publishToMavenLocal {
-        dependsOn(build)
-    }
+    publishToMavenLocal { dependsOn(build) }
+    bintrayUpload { dependsOn(publishToMavenLocal) }
 }
-
-/*
-val sourcesJar by tasks.creating(Jar::class) {
-    archiveClassifier.set("sources")
-    from(sourceSets.getByName("jsMain").allSource)
-}
-*/
 
 val artifactName = "bulma-kotlin"
 val artifactGroup = "com.centyllion"
@@ -72,38 +61,39 @@ val pomLicenseDist = "repo"
 val pomDeveloperId = "centyllion"
 val pomDeveloperName = "Centyllion"
 
-publishing {
+fun PublicationContainer.createPublication(name: String) {
+    create<MavenPublication>(name) {
+        groupId = artifactGroup
+        artifactId = artifactName
+        version = currentVersion
+        from(components[name])
 
-    publications {
-        create<MavenPublication>("lib") {
-            groupId = artifactGroup
-            artifactId = artifactName
-            version = currentVersion
-            components.names
-           // from(components["java"])
-           // artifact(sourcesJar)
-
-            pom.withXml {
-                asNode().apply {
-                    appendNode("description", pomDesc)
-                    appendNode("name", rootProject.name)
-                    appendNode("url", pomUrl)
-                    appendNode("licenses").appendNode("license").apply {
-                        appendNode("name", pomLicenseName)
-                        appendNode("url", pomLicenseUrl)
-                        appendNode("distribution", pomLicenseDist)
-                    }
-                    appendNode("developers").appendNode("developer").apply {
-                        appendNode("id", pomDeveloperId)
-                        appendNode("name", pomDeveloperName)
-                    }
-                    appendNode("scm").apply {
-                        appendNode("url", pomScmUrl)
-                        appendNode("connection", pomScmConnection)
-                    }
+        pom.withXml {
+            asNode().apply {
+                appendNode("description", pomDesc)
+                appendNode("name", rootProject.name)
+                appendNode("url", pomUrl)
+                appendNode("licenses").appendNode("license").apply {
+                    appendNode("name", pomLicenseName)
+                    appendNode("url", pomLicenseUrl)
+                    appendNode("distribution", pomLicenseDist)
+                }
+                appendNode("developers").appendNode("developer").apply {
+                    appendNode("id", pomDeveloperId)
+                    appendNode("name", pomDeveloperName)
+                }
+                appendNode("scm").apply {
+                    appendNode("url", pomScmUrl)
+                    appendNode("connection", pomScmConnection)
                 }
             }
         }
+    }
+}
+
+publishing {
+    publications {
+        components.forEach { createPublication(it.name) }
     }
 }
 
@@ -113,7 +103,13 @@ bintray {
     publish = true
     override = true
 
-    setPublications("lib")
+
+    setPublications(
+            *publishing.publications
+                    .map { it.name }
+                    .filter { it != "kotlinMultiplatform"
+                    }.toTypedArray()
+    )
 
     pkg.apply {
         repo = "Libraries"
