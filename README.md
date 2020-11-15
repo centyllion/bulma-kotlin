@@ -67,6 +67,11 @@ When the value of multiple elements has changed a simple [diff](https://github.c
 
 ## Change logs
 
+## 0.3.3 (???)
+
+- Adds size support for Label
+- Correct Card header icon class
+
 ## 0.3.2 (1st of June 2020)
 
 - Adds support for multiple select (API change on the listener to a list of Option).

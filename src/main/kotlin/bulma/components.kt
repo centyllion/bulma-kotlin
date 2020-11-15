@@ -97,7 +97,11 @@ class CardHeader(text: String = "", icon: Icon? = null) : CardItem {
             titleNode.innerText = value
         }
 
-    var icon by bulma(icon, root)
+    var icon by bulma(icon, root) {
+        it.root.classList.remove("icon")
+        it.root.classList.add("card-header-icon")
+        it.root
+    }
 
 }
 

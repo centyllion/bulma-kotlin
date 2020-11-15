@@ -86,19 +86,21 @@ class HorizontalField(label: FieldElement, vararg body: Field) : BulmaElement {
 
 }
 
-class Label(text: String = "") : ControlElement, FieldElement {
+class Label(text: String = "", size: Size = Size.None) : ControlElement, FieldElement {
     override val root: HTMLElement = document.create.label("label") {
         +text
     }
+
+    val size by className(size, root)
 }
 
-class Value(text: String = "") : ControlElement {
+class Value(text: String = "") : ControlElement, FieldElement {
     override val root: HTMLElement = document.create.span("value") {
         +text
     }
 }
 
-class Help(text: String = "") : ControlElement {
+class Help(text: String = "") :  ControlElement, FieldElement {
     override val root: HTMLElement = document.create.p("help") {
         +text
     }
