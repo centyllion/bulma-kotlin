@@ -26,6 +26,7 @@ import org.w3c.dom.events.FocusEvent
 import org.w3c.dom.events.UIEvent
 import org.w3c.files.FileList
 import kotlinx.browser.document
+import kotlinx.browser.window
 import kotlin.random.Random
 
 interface FieldElement : BulmaElement
@@ -335,8 +336,9 @@ class Select(
         }
     }
 
+    // Uses a timeout to set the initial select index to ensure it's set
     private val selectNode = root.querySelector("select") as HTMLSelectElement
-    init { selectNode.selectedIndex = selectedIndex }
+    init { window.setTimeout({ selectNode.selectedIndex = selectedIndex  }, 0) }
 
     var selectedIndex
         get() = selectNode.selectedIndex

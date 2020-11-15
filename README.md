@@ -71,6 +71,7 @@ When the value of multiple elements has changed a simple [diff](https://github.c
 
 - Adds size support for Label
 - Correct Card header icon class
+- Correct Select initial selection
 
 ## 0.3.2 (1st of June 2020)
 
