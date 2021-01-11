@@ -1,6 +1,7 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package bulma
 
+import kotlinx.browser.document
 import kotlinx.html.a
 import kotlinx.html.article
 import kotlinx.html.aside
@@ -21,14 +22,7 @@ import kotlinx.html.role
 import kotlinx.html.section
 import kotlinx.html.span
 import kotlinx.html.ul
-import org.w3c.dom.HTMLAnchorElement
-import org.w3c.dom.HTMLButtonElement
-import org.w3c.dom.HTMLDivElement
-import org.w3c.dom.HTMLElement
-import org.w3c.dom.HTMLParagraphElement
-import org.w3c.dom.HTMLSpanElement
-import org.w3c.dom.HTMLUListElement
-import kotlinx.browser.document
+import org.w3c.dom.*
 import kotlin.collections.set
 import kotlin.properties.Delegates.observable
 
@@ -679,6 +673,13 @@ class Panel(
     override val root: HTMLElement = document.create.nav("panel") {
         p("panel-heading") { +text }
     }
+
+    private val textNode = root.querySelector("p.panel-heading") as HTMLElement
+
+    override var text: String
+        get() = textNode.innerText
+        set(value) { textNode.innerText = value }
+
 
     var items by embeddedBulmaList(items.toList(), root) { document.create.div() }
 

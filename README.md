@@ -69,7 +69,9 @@ When the value of multiple elements has changed a simple [diff](https://github.c
 
 ## 0.3.3 (???)
 
+- Adds Spacing enum class
 - Adds size support for Label
+- Correct Panel title change
 - Correct Card header icon class
 - Correct Select initial selection
 
