@@ -1,4 +1,4 @@
-import java.util.Date
+import java.util.*
 
 val kotlinx_html_version: String = "0.7.2"
 val currentVersion = versioning.info.base.let { if (it.isEmpty()) "dev" else it }
@@ -7,7 +7,7 @@ group = "com.centyllion"
 version = currentVersion
 
 plugins {
-    kotlin("js") version "1.4.10"
+    kotlin("js") version "1.4.21"
     id("fr.coppernic.versioning") version "3.1.2"
     id("com.jfrog.bintray") version "1.8.4"
     id("maven-publish")
@@ -23,7 +23,7 @@ repositories {
 }
 
 kotlin {
-    js { browser() }
+    js(IR) { browser() }
 }
 
 dependencies {
