@@ -23,7 +23,7 @@ repositories {
 }
 
 kotlin {
-    js(IR) { browser() }
+    js(BOTH) { browser() }
 }
 
 dependencies {

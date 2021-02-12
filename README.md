@@ -67,7 +67,7 @@ When the value of multiple elements has changed a simple [diff](https://github.c
 
 ## Change logs
 
-## 0.3.3 (???)
+## 0.4.0 (26th of October 2020)
 
 - Adds Spacing enum class
 - Adds size support for Label
