@@ -67,7 +67,7 @@ When the value of multiple elements has changed a simple [diff](https://github.c
 
 ## Change logs
 
-## 0.4.1 
+## 0.4.1 (12th of Febuary 2021)
 
 - Adds the support for thr [badge](https://github.com/CreativeBulma/bulma-badge) extension.
 - Adds a utility function to add a BulmaElement into another.
