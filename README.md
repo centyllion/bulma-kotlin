@@ -67,6 +67,11 @@ When the value of multiple elements has changed a simple [diff](https://github.c
 
 ## Change logs
 
+## 0.4.1 
+
+- Adds the support for thr [badge](https://github.com/CreativeBulma/bulma-badge) extension.
+- Adds a utility function to add a BulmaElement into another.
+
 ## 0.4.0 (26th of October 2020)
 
 - Adds Spacing enum class

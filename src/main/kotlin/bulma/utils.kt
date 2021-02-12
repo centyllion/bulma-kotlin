@@ -18,6 +18,12 @@ val bulma = object: Bulma {
     override var logDiffs: Boolean = false
 }
 
+/** Appends a BulmaElement to another (in general for unsupported use cases). */
+fun BulmaElement.append(element: BulmaElement) {
+    root.appendChild(element.root)
+}
+
+
 /** Position where to insert on node using `insertAdjacentElement`. */
 enum class Position(val value: String) {
     BeforeBegin("beforebegin"), AfterBegin("afterbegin"),
