@@ -28,16 +28,38 @@ Since Bulma elements can be stacked, it's easy to build complex components.
 It also provides controllers that links data and Bulma elements. 
 Especially a special `MultipleController` that deals with lists.
 
+The binaries for `bulma-kotlin` are published in the GitHub packages. 
+To be able to download them from your gradle, you'll need a Github Token (see GitHub's [instructions](https://docs.github.com/en/packages/learn-github-packages/installing-a-package#installing-a-package)). Store your user and token in `$HOME/.gradle/gradle.properties` file named `gprUser` and `gprToken`.
 
-To get started import `bulma-kotlin` in your Koltin project, if you use gradle, add the repository:
+```properties
+gprUser=me
+gptToken=AAAAAAAAA
+```
 
-```gradle
-maven("https://dl.bintray.com/centyllion/Libraries")
+Then configure your project (with gradle Kotlin DSL) to use the repository and include the dependency. 
+
+```kotlin
+val grpUser: String by project
+val grpToken: String by project
+
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/centyllion/bulma-kotlin")
+        credentials {
+            username = grpUser
+            password = grpToken
+        }
+    }
+}
+
+  ...
+
+dependencies {
+  implementation("com.centyllion:bulma-kotlin:0.4.2")
+}
 ```
-and the dependency:
-```gradle
-implementation("com.centyllion:bulma-kotlin:0.3.1")
-```
+
+Other solution can be applied, this one is just one example.
 
 The Bulma CSS library isn't added by `bulma-kotlin`, a version must be available ([Getting started with Bulma](https://bulma.io/documentation/overview/start/))
 and explicit to allow further extensions to be added.
@@ -67,7 +89,12 @@ When the value of multiple elements has changed a simple [diff](https://github.c
 
 ## Change logs
 
-## 0.4.1 (12th of Febuary 2021)
+## 0.4.2 (8th of June 2021)
+
+- Migration to GitHub package repository
+- Uses Kotlin 1.5.0
+
+## 0.4.1 (12th of February 2021)
 
 - Adds the support for thr [badge](https://github.com/CreativeBulma/bulma-badge) extension.
 - Adds a utility function to add a BulmaElement into another.
