@@ -28,7 +28,7 @@ Since Bulma elements can be stacked, it's easy to build complex components.
 It also provides controllers that links data and Bulma elements. 
 Especially a special `MultipleController` that deals with lists.
 
-The binaries for `bulma-kotlin` are published in the GitHub packages. 
+The binaries for `bulma-kotlin` are published in the GitHub packages. It requires the new `IR` format, (`LEGACY` isn't supported). 
 To be able to download them from your gradle, you'll need a Github Token (see GitHub's [instructions](https://docs.github.com/en/packages/learn-github-packages/installing-a-package#installing-a-package)). Store your user and token in `$HOME/.gradle/gradle.properties` file named `gprUser` and `gprToken`.
 
 ```properties
