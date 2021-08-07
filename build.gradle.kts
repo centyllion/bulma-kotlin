@@ -9,13 +9,13 @@ group = "com.centyllion"
 version = currentVersion
 
 plugins {
-    kotlin("js") version "1.5.0"
+    kotlin("js") version "1.5.21"
     id("fr.coppernic.versioning") version "3.1.2"
     id("maven-publish")
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 kotlin {
