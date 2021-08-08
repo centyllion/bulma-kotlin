@@ -93,6 +93,11 @@ When the value of multiple elements has changed a simple [diff](https://github.c
 
 ## Change logs
 
+## 0.5.0 (9th of August 2021)
+
+- Adapts to IR
+  - `bulma.extension.ToastAnimation` and `bulma.extension.ToastOptions` are now interface. Use `BasicToastAnimation` or `BasicToastOptions`.
+
 ## 0.4.3 (8th of June 2021)
 
 - Retrieve missing Slider component
