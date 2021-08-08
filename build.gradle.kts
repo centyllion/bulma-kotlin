@@ -1,5 +1,5 @@
 
-val kotlinx_html_version: String = "0.7.2"
+val kotlinx_html_version: String = "0.7.3"
 val currentVersion = versioning.info.base.let { if (it.isEmpty()) "dev" else it }
 
 val grpUser: String by project
