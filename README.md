@@ -93,6 +93,10 @@ When the value of multiple elements has changed a simple [diff](https://github.c
 
 ## Change logs
 
+## 0.4.3 (8th of June 2021)
+
+- Retrieve missing Slider component
+
 ## 0.4.2 (8th of June 2021)
 
 - Migration to GitHub package repository
